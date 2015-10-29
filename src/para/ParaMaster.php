@@ -47,8 +47,10 @@ abstract class ParaMaster extends Para {
 
 	public function loop($timeout = 0) {
 		//feed first set of tasks
-		if (!$this->registerTasks($this->getTasks($this->tasksToPrefetch)))
+		if (!$this->registerTasks($this->getTasks($this->tasksToPrefetch))) {
+			$this->log('no more tasks. quitting');
 			return;
+		}
 
 		parent::loop($timeout);
 	}
@@ -85,6 +87,7 @@ abstract class ParaMaster extends Para {
 		//Check for reminder. Only do it for own results!!
 		if ($o->pid === $this->processId) {
 			if (!--$this->tasksToProcess) {
+				$this->log('no more tasks. quitting');
 				//shut the workers down
 				$this->channel->basic_publish(new AMQPMessage('quit'), $this->u('control'));
 				//unbind from all events = leave the message loop

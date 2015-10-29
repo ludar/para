@@ -41,6 +41,7 @@ abstract class ParaWorker extends Para {
 	public function controlMsgHandler($msg) {
 		switch ($msg->body) {
 			case 'quit':
+				$this->log('quit control signal recieved. quitting');
 				//unbind from all events = leave the message loop
 				$this->unbindAll();
 				break;
