@@ -19,7 +19,7 @@ function kill159(){
 	[[ -z "$@" ]] && return
 
 	#pause is scaled 2..40 secs
-	local pauseFloat=$(bc -l <<< "40*a($#/100)/(a(1)*2)")
+	local pauseFloat=$(awk "{print 40*atan2($#,100)/atan2(1,0)}" <<< "")
 	local pause=${pauseFloat/.*/}
 	[[ $pauseFloat =~ \.0+$ ]] || ((pause+=1))
 	[[ $pause -lt 2 ]] && pause=2
