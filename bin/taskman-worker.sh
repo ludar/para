@@ -13,7 +13,7 @@ function usage(){
 function killWorkers(){
 	local phPids=() pid shPid
 	for pid in $@; do
-		shPid=$(pgrep -fP $pid 'sh -c bin/phantomjs')
+		shPid=$(pgrep -fP $pid 'sh -c softlimit')
 		[[ $? -eq 0 ]] && {
 			phPid=$(pgrep -P $shPid phantomjs)
 			[[ $? -eq 0 ]] && {
