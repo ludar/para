@@ -25,7 +25,7 @@ function killWorkers(){
 	kill159 $@
 	
 	echo killing abandoned phantomjs instances
-	[[ ${#phPids[@]} -gt 0 ]] && kill ${phPids[@]}
+	[[ ${#phPids[@]} -gt 0 ]] && kill ${phPids[@]} 2>/dev/null
 }
 
 checkTask "$1"
