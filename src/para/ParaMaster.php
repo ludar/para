@@ -85,7 +85,7 @@ abstract class ParaMaster extends Para {
 		$this->channel->basic_ack($msg->get('delivery_tag'));
 
 		//Check for reminder. Only do it for own results!!
-		if ($o->pid === $this->processId) {
+		if ($o['pid'] === $this->processId) {
 			if (!--$this->tasksToProcess) {
 				$this->log('no more tasks. quitting');
 				//shut the workers down

@@ -22,7 +22,7 @@ action="$2"
 case "$action" in
 	start)
 		#check for another master instance running
-		pexists $masterUid && bye another master instance is running. use 'stop' action to kill it
+		pexists $masterUid && bye another master instance is running. use \'stop\' action to kill it
 		
 		masterLog="$taskLogs"/master.log 
 

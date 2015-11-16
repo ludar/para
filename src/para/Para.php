@@ -64,7 +64,11 @@ class Para {
 	}
 
 	protected function unpackMessage($s) {
-		return json_decode($s, false); //as objects
+		//NEVER EVER USE OBJECTS HERE!!
+		//Decoding into arrays always produces arrays.
+		//Decoding into objects produces objects and might produce 0-based arrays.
+		//So decoding into objects produces mixed types.
+		return json_decode($s, true);
 	}
 
 }

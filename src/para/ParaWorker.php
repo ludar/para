@@ -29,7 +29,7 @@ abstract class ParaWorker extends Para {
 		$o = $this->unpackMessage($msg->body);
 
 		//process the task
-		$o->data = $this->process($o->data);
+		$o['data'] = $this->process($o['data']);
 
 		//First pass results to the master, next confirm success.
 		//This way on fail we might do the same task more than once but no tasks are lost

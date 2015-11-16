@@ -3,6 +3,9 @@ function bye(){
 	exit
 }
 function spawn(){
+	rm -f "$2"
+	#ensure the log exists right after spawn invocation
+	touch "$2"
 	$1 >"$2" 2>&1 &
 }
 
