@@ -45,10 +45,18 @@ abstract class ParaMaster extends Para {
 		}
 	}
 
+	protected function quit() {
+		$this->log('no more tasks. quitting');
+		//shut the workers down
+		$this->channel->basic_publish(new AMQPMessage('quit'), $this->u('control'));
+		//unbind from all events = leave the message loop
+		$this->unbindAll();
+	}
+
 	public function loop($timeout = 0) {
 		//feed first set of tasks
 		if (!$this->registerTasks($this->getTasks($this->tasksToPrefetch))) {
-			$this->log('no more tasks. quitting');
+			$this->quit();
 			return;
 		}
 
@@ -87,11 +95,7 @@ abstract class ParaMaster extends Para {
 		//Check for reminder. Only do it for own results!!
 		if ($o['pid'] === $this->processId) {
 			if (!--$this->tasksToProcess) {
-				$this->log('no more tasks. quitting');
-				//shut the workers down
-				$this->channel->basic_publish(new AMQPMessage('quit'), $this->u('control'));
-				//unbind from all events = leave the message loop
-				$this->unbindAll();
+				$this->quit();
 			} elseif (!$this->finalizing && ($this->tasksToProcess / $this->tasksToPrefetch < 0.2)) {
 				//fetch new set of tasks if the buffer falls below 20%
 				//Be sure to have @tasksToPrefetch > 20% of total workers number so no workers are idle at any time

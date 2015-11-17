@@ -12,7 +12,8 @@
 	},
 	"bin":[
 		"bin/taskman-master.sh",
-		"bin/taskman-worker.sh"
+		"bin/taskman-worker.sh",
+		"bin/taskman-run.sh"
 	]
 
 }

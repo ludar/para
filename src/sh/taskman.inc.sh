@@ -63,3 +63,7 @@ function checkTask(){
 		mkdir -p "$taskLogs" 2>/dev/null || bye cant create "$taskLogs"
 	fi
 }
+
+function isInt(){
+	[[ "$1" =~ ^[0-9]+$ ]]
+}

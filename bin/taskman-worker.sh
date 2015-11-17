@@ -37,7 +37,7 @@ action="$2"
 case "$action" in
 	limit)
 		N="$3"
-		[[ "$N" =~ ^[0-9]+$ ]] || bye limit requires an uint argument
+		isInt "$N" || bye limit requires an uint argument
 
 		if [[ $N -gt 0 ]]; then
 			[[ $N -eq $running ]] && bye there are exactly $N workers running
