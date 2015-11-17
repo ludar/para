@@ -45,8 +45,8 @@ abstract class ParaMaster extends Para {
 		}
 	}
 
-	protected function quit() {
-		$this->log('no more tasks. quitting');
+	protected function quit( $reason='no more tasks. quitting') {
+		$this->log($reason);
 		//shut the workers down
 		$this->channel->basic_publish(new AMQPMessage('quit'), $this->u('control'));
 		//unbind from all events = leave the message loop
