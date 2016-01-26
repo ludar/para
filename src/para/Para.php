@@ -14,7 +14,7 @@ class Para {
 	}
 
 	public function raise($s, $method) {
-		throw new Exception($method . ' : ' . $s);
+		throw new \Exception($method . ' : ' . $s);
 	}
 
 	protected function log($s) {
