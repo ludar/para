@@ -8,7 +8,7 @@
 	},
 	"require": {
 		"php": ">=5.4.0",
-		"videlalvaro/php-amqplib": "2.5.*"
+		"php-amqplib/php-amqplib": "2.5.*"
 	},
 	"bin":[
 		"bin/taskman-master.sh",
